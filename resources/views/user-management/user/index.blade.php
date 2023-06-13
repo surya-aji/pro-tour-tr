@@ -16,8 +16,8 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Created at / Updated at</th>
-                                <th>Created by / Updated by</th>
+                                <th>Log</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,18 +33,6 @@
                                                 </span>
                                         </span>
                             @endif
-                            <div class="onhover-show-div">
-                                <ul class="icon-lists navs-icon">
-                                    <li>
-                                        <a href="javascript:void(0)" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalgetbootstrap{{$item->id}}" data-whatever="@getbootstrap"><i
-                                                data-feather="feather"></i><span> Edit</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('delete-user',$item->id)}}"><i data-feather="trash"></i><span> Delete</span></a>
-                                    </li>
-                                </ul>
-                            </div>
                             </span>
                             </td>
                             <td>{{ $item->email }}</td>
@@ -53,8 +41,14 @@
                                 {{ $role->name }}
                                 @endforeach
                             </td>
-                            <td><code>{{ $item->created_at }}<br>{{ $item->updated_at }}</code></td>
-                            <td><code>{{ $item->created_by }}<br>{{ $item->updated_by }}</code></td>
+                            <td><div class=""><i class="fa fa-spin fa-refresh"></i><code>Recently Updated by<br>{{ $item->updated_by }}</code></div></code></td>
+                            <td>
+                                <span>
+                                    <a href="javascript:void(0)" type="button" data-bs-toggle="modal"data-bs-target="#exampleModalgetbootstrap{{$item->id}}" data-whatever="@getbootstrap"><i class="fa fa-pencil"></i><span> Edit</span></a>
+                                    <a class="text-danger" href="{{route('delete-user',$item->id)}}"><i class="fa fa-trash"></i><span> Delete</span></a>
+                                </span>
+                                </td>
+
                             </tr>
 
 
@@ -109,7 +103,7 @@
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Created at / Updated at</th>
-                                <th>Created by / Updated by</th>
+                                <th>Log</th>
                             </tr>
                         </tfoot>
                     </table>

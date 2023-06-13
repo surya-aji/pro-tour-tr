@@ -4,8 +4,9 @@
         <div class="card">
             <div class="card-header">
                 <h5>{{ $title }}</h5>
-                <button class="btn btn-sm btn-success" type="button" data-bs-toggle="modal"
-                data-bs-target="#exampleModalgetbootstrapCreate" data-whatever="@getbootstrap">Add Role</button>
+                {{-- <button class="btn btn-sm btn-success" type="button" data-bs-toggle="modal"
+                data-bs-target="#exampleModalgetbootstrapCreate" data-whatever="@getbootstrap">Add Role</button> --}}
+                <a href="{{route('create-role-page')}}" class="btn btn-sm btn-success">Add Role</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -14,8 +15,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Created at / Updated at</th>
-                                <th>Created by / Updated by</th>
+                                <th>Log</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,22 +25,14 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="onhover-dropdown navs-dropdown ">
                                       {{$item->name}}
-                            <div class="onhover-show-div">
-                                <ul class="icon-lists navs-icon">
-                                    <li>
-                                        <a href="javascript:void(0)" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalgetbootstrap{{$item->id}}" data-whatever="@getbootstrap"><i
-                                                data-feather="feather"></i><span> Edit</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('delete-role',$item->id)}}"><i data-feather="trash"></i><span> Delete</span></a>
-                                    </li>
-                                </ul>
-                            </div>
                             </span>
                             </td>
-                            <td><code>{{ $item->created_at }}<br>{{ $item->updated_at }}</code></td>
-                            <td><code>{{ $item->created_by }}<br>{{ $item->updated_by }}</code></td>
+                            <td><div class=""><i class="fa fa-spin fa-refresh"></i><code>Recently Updated by<br>{{ $item->updated_by }}</code></div></td>
+                            <td> <span>
+                                {{-- <a href="javascript:void(0)" type="button" data-bs-toggle="modal"data-bs-target="#exampleModalgetbootstrap{{$item->id}}" data-whatever="@getbootstrap"><i class="fa fa-pencil"></i><span> Edit</span></a> --}}
+                                <a class="" href="{{route('show-role',$item->id)}}"><i class="fa fa-pencil"></i><span> Edit</span></a>
+                                <a class="text-danger" href="{{route('delete-role',$item->id)}}"><i class="fa fa-trash"></i><span> Delete</span></a>
+                            </span></td>
                             </tr>
 
 
@@ -91,8 +84,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Created at / Updated at</th>
-                                <th>Created by / Updated by</th>
+                                <th>Log</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

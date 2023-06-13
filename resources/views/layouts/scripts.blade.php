@@ -46,3 +46,5 @@
  <script src="{{asset('build/template/assets/js/script.js')}}"></script>
  <script src="{{asset('build/template/assets/js/theme-customizer/customizer.js')}}"></script>
  <!-- Plugin used-->
+
+ @stack('custom-script')

@@ -146,7 +146,7 @@
                                     <input id="checkbox1" type="checkbox" />
                                     <label class="text-muted" for="checkbox1">Remember password</label>
                                 </div>
-                                <a class="link" href="https://laravel.pixelstrap.com/viho/forget-password">Forgot
+                                <a class="link" href="{{ route('password.request') }}">Forgot
                                     password?</a>
                             </div>
                             <div class="form-group"><button class="btn btn-primary btn-block"
@@ -175,8 +175,8 @@
                                     </li>
                                 </ul>
                             </div> --}}
-                            <p>Don't have account?<a class="ms-2"
-                                    href={{ route('register') }}>Create Account</a></p>
+                            {{-- <p>Don't have account?<a class="ms-2"
+                                    href={{ route('register') }}>Create Account</a></p> --}}
                         </form>
                     </div>
                 </div>

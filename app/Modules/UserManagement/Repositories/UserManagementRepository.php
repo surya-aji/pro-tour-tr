@@ -152,6 +152,14 @@ class UserManagementRepository implements UserManagementInterface{
       return view('error')->with('error', $th->getMessage());
     }
   }
+
+  public function create_role_page($request){
+    try {
+      return view('user-management.roles.create')->with(['permissions' => PermissionUser::with('children')->where('parent_id', 0)->get()]);
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
   
   /**
    * create_role
@@ -161,8 +169,19 @@ class UserManagementRepository implements UserManagementInterface{
    */
   public function create_role($request){
     try {
-      Role::create(['name' => $request->name, 'created_by' => Auth::user()->id,'updated_by' => Auth::user()->id])->syncPermissions($request->permissions);
-      return redirect()->back()->with(['error' => 'Role Created']);
+      foreach ($request->permission as $key => $value) {
+        $permission[] = $key; 
+      }
+      Role::create(['name' => $request->name, 'created_by' => Auth::user()->id,'updated_by' => Auth::user()->id])->syncPermissions($permission);
+      return redirect()->route('index-role')->with(['error' => 'Role Created']);
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
+
+  public function show_role($request){
+    try {
+      return view('user-management.roles.edit')->with(['role' => Role::where('id',$request)->first(),'title' => 'List Role', 'permissions' => PermissionUser::with('children')->where('parent_id', 0)->get()]);
     } catch (\Throwable $th) {
       return view('error')->with('error', $th->getMessage());
     }
@@ -175,11 +194,14 @@ class UserManagementRepository implements UserManagementInterface{
    * @return void
    */
   public function update_role($request){
-    try {
+    try { 
+      foreach ($request->permission as $key => $value) {
+        $permission[] = $key; 
+      }
       $role = Role::find($request->id);
       $role->update(['name' => $request->name,'updated_by' => Auth::user()->id]);
-      $role->syncPermissions($request->permissions);
-      return redirect()->back()->with(['error' => 'Role Updated']);
+      $role->syncPermissions($permission);
+      return redirect()->route('index-role')->with(['error' => 'Role Updated']);
     } catch (\Throwable $th) {
       return view('error')->with('error', $th->getMessage());
     }

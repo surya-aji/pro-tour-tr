@@ -15,9 +15,7 @@ use App\Modules\UserManagement\Controller\UserManagementController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', function () { return view('auth.login');});
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
@@ -33,14 +31,14 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         Route::get('/delete-permission/{id}', [UserManagementController::class, 'delete_permission'])->name('delete-permission');
 
         Route::get('/role', [UserManagementController::class, 'index_role'])->name('index-role');
+        Route::get('/create-role', [UserManagementController::class, 'create_role_page'])->name('create-role-page');
         Route::post('/add-role', [UserManagementController::class, 'create_role'])->name('create-role');
         Route::post('/edit-role', [UserManagementController::class, 'update_role'])->name('update-role');
+        Route::get('/show-role/{id}', [UserManagementController::class, 'show_role'])->name('show-role');
         Route::get('/delete-role/{id}', [UserManagementController::class, 'delete_role'])->name('delete-role');
     });
-
     Route::prefix('settings')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('index-setting');
         Route::post('/update-setting', [SettingController::class, 'update'])->name('update-setting');
     });
-    
 });

@@ -78,6 +78,22 @@ interface UserManagementInterface
   public function index_role($request);
   
   /**
+   * create_role_page
+   *
+   * @param  mixed $request
+   * @return void
+   */
+  public function create_role_page($request);
+  
+  /**
+   * show_role
+   *
+   * @param  mixed $request
+   * @return void
+   */
+  public function show_role($request);
+  
+  /**
    * create_role
    *
    * @param  mixed $request

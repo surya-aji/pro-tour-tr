@@ -157,6 +157,34 @@ class UserManagementController extends Controller
     }
     
     /**
+     * create_role_page
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function create_role_page(Request $request){
+        try {
+            return $this->UserManagementInterface->create_role_page($request);
+        } catch (\Throwable $th) {
+            return view('error')->with('error', $th->getMessage());
+        }
+    }
+    
+    /**
+     * show_role
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function show_role($request){
+        try {
+            return $this->UserManagementInterface->show_role($request);
+        } catch (\Throwable $th) {
+            return view('error')->with('error', $th->getMessage());
+        }
+    }
+    
+    /**
      * create_role
      *
      * @param  mixed $request

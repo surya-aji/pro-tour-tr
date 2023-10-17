@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Modules\Pegawai\Controller\PegawaiController;
 use App\Modules\Settings\Controller\SettingController;
+use App\Modules\SuratTugas\Controller\SuratTugasController;
 use App\Modules\UserManagement\Controller\UserManagementController;
 
 /*
@@ -37,6 +39,23 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         Route::get('/show-role/{id}', [UserManagementController::class, 'show_role'])->name('show-role');
         Route::get('/delete-role/{id}', [UserManagementController::class, 'delete_role'])->name('delete-role');
     });
+
+    Route::prefix('pegawai')->group(function () {
+        Route::get('/', [PegawaiController::class, 'index'])->name('index-pegawai');
+        Route::post('/store-pegawai', [PegawaiController::class, 'store'])->name('store-pegawai');
+        Route::post('/update-pegawai', [PegawaiController::class, 'update'])->name('update-pegawai');
+        Route::get('/delete-pegawai/{id}', [PegawaiController::class, 'delete'])->name('delete-pegawai');
+    });
+
+    Route::prefix('surat')->group(function () {
+        Route::get('/surat-tugas', [SuratTugasController::class, 'index_surat_tugas'])->name('index-surat-tugas');
+        Route::get('/cetak-st/{id}', [SuratTugasController::class, 'cetak_st'])->name('cetak-st');
+        Route::get('/spd', [SuratTugasController::class, 'index_surat_spd'])->name('index-spd');
+        Route::post('/add-surat-tugas', [SuratTugasController::class, 'add_surat_tugas'])->name('add-surat-tugas');
+        // Route::post('/update-pegawai', [PegawaiController::class, 'update'])->name('update-pegawai');
+        // Route::get('/delete-pegawai/{id}', [PegawaiController::class, 'delete'])->name('delete-pegawai');
+    });
+    
     Route::prefix('settings')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('index-setting');
         Route::post('/update-setting', [SettingController::class, 'update'])->name('update-setting');

@@ -12,7 +12,7 @@
                             <input id="m" class="form-control" name="name" id="exampleInputEmail1" type="text"
                                 aria-describedby="emailHelp" placeholder="Role" value="" />
                         </div>
-                        <button class="btn btn-secondary">Cancel</button>
+                        <a href="{{route('index-role')}}" class="btn btn-secondary">Cancel</a>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
 

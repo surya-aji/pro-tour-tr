@@ -33,7 +33,12 @@
                 <div class="bookmark-box"><img class="img-50 rounded-circle" src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : asset('build/template/assets/images/dashboard/1.png') }}"alt="" /></div>
                 <div class="bookmark-dropdown onhover-show-div">
                     <ul>
-                        <li class="add-to-bookmark"><i class="bookmark-icon"data-feather="more-vertical"></i> <a href="{{ route('profile.show') }}">Profile Account</a></li>
+                        <li class="add-to-bookmark">
+                            @if (!request()->is('user/profile'))
+
+                            <i class="bookmark-icon"data-feather="more-vertical"></i> 
+                            @endif
+                            <a href="{{ route('profile.show') }}">Profile Account</a></li>
                                     <li class="add-to-bookmark">
                                         <span>
                                             <i class="fa fa-sign-out mr-1"></i>

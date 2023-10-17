@@ -15,6 +15,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
+                                <th>Permission</th>
                                 <th>Log</th>
                                 <th>Action</th>
                             </tr>
@@ -23,9 +24,15 @@
                             @foreach ($role as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td class="onhover-dropdown navs-dropdown ">
+                                    <td>
                                       {{$item->name}}
                             </span>
+                            <td>
+                              {{-- {{$item->permission}} --}}
+                              @foreach ($item->permissions as $permit)
+                                  <li>{{$permit->name}}</li>
+                              @endforeach
+                            </td>
                             </td>
                             <td><div class=""><i class="fa fa-spin fa-refresh"></i><code>Recently Updated by<br>{{ $item->updated_by }}</code></div></td>
                             <td> <span>
@@ -84,6 +91,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
+                                <th>Permission</th>
                                 <th>Log</th>
                                 <th>Action</th>
                             </tr>

@@ -41,6 +41,7 @@
  <script src="{{asset('build/template/assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
  <script src="{{asset('build/template/assets/js/select2/select2.full.min.js')}}"></script>
  <script src="{{asset('build/template/assets/js/select2/select2-custom.js')}}"></script>
+ <script src="{{asset('build/template/assets/js/form-wizard/form-wizard')}}.js"></script>
  <!-- Plugins JS Ends-->
  <!-- Theme js-->
  <script src="{{asset('build/template/assets/js/script.js')}}"></script>

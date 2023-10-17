@@ -13,7 +13,7 @@
                             <input id="m" class="form-control" name="name" id="exampleInputEmail1" type="text"
                                 aria-describedby="emailHelp" placeholder="Role" value="{{ $role->name }}" />
                         </div>
-                        <button class="btn btn-secondary">Cancel</button>
+                        <a href="{{route('index-role')}}" class="btn btn-secondary">Cancel</a>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
 
@@ -40,7 +40,7 @@
                                             <li class="pl-navs-inline">
                                                 <div class="media">
                                                     <div class="media-body switch-md row">
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-6">
                                                             <label class="switch">
                                                                 @if (in_array($permission->id, $role->permissions->pluck('id')->toArray()))
                                                                     <input

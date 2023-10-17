@@ -19,9 +19,12 @@
         <!-- Page Header Ends -->
         <!-- Page Body Start-->
         <div class="page-body-wrapper sidebar-icon">
+
             <!-- Page Sidebar Start-->
-         @include('layouts.sidebar')
+            @include('layouts.sidebar')
             <!-- Page Sidebar Ends-->
+           
+
             <div class="page-body">
                 <!-- Container-fluid starts-->
                 <!-- Container-fluid starts-->

@@ -88,7 +88,7 @@ class UserManagementRepository implements UserManagementInterface{
    */
   public function index_permission($request){
     try {
-      return view('user-management.permissions.index')->with(['permissions' => Permission::whereNotIn('parent_id', [0])->get() ,'title' => 'List Permissions','parent_permissions' => Permission::where('parent_id',0)->get() ]);
+      return view('user-management.permissions.index')->with(['parent' => Permission::whereIn('parent_id', [0])->get() ,'permissions' => Permission::whereNotIn('parent_id', [0])->get() ,'title' => 'List Permissions','parent_permissions' => Permission::where('parent_id',0)->get() ]);
     } catch (\Throwable $th) {
       return view('error')->with('error', $th->getMessage());
     }
@@ -178,7 +178,13 @@ class UserManagementRepository implements UserManagementInterface{
       return view('error')->with('error', $th->getMessage());
     }
   }
-
+  
+  /**
+   * show_role
+   *
+   * @param  mixed $request
+   * @return void
+   */
   public function show_role($request){
     try {
       return view('user-management.roles.edit')->with(['role' => Role::where('id',$request)->first(),'title' => 'List Role', 'permissions' => PermissionUser::with('children')->where('parent_id', 0)->get()]);

@@ -5,7 +5,7 @@
             <div class="card-header">
                 <h5>{{ $title }}</h5>
                 <button class="btn btn-sm btn-success" type="button" data-bs-toggle="modal"
-                data-bs-target="#exampleModalgetbootstrapCreate" data-whatever="@getbootstrap">Add User</button>
+                data-bs-target="#exampleModalgetbootstrapCreate" data-whatever="@getbootstrap">Tambah User</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -13,7 +13,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Name</th>
+                                <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Log</th>
@@ -44,8 +44,8 @@
                             <td><div class=""><i class="fa fa-spin fa-refresh"></i><code>Recently Updated by<br>{{ $item->updated_by }}</code></div></code></td>
                             <td>
                                 <span>
-                                    <a href="javascript:void(0)" type="button" data-bs-toggle="modal"data-bs-target="#exampleModalgetbootstrap{{$item->id}}" data-whatever="@getbootstrap"><i class="fa fa-pencil"></i><span> Edit</span></a>
-                                    <a class="text-danger" href="{{route('delete-user',$item->id)}}"><i class="fa fa-trash"></i><span> Delete</span></a>
+                                    <a href="javascript:void(0)" type="button" data-bs-toggle="modal"data-bs-target="#exampleModalgetbootstrap{{$item->id}}" data-whatever="@getbootstrap"><i class="fa fa-pencil"></i><span> Ubah</span></a>
+                                    <a class="text-danger" href="{{route('delete-user',$item->id)}}"><i class="fa fa-trash"></i><span> Hapus</span></a>
                                 </span>
                                 </td>
 
@@ -57,8 +57,8 @@
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Update User {{$item->name}}</h5>
+                                        <div class="modal-header bg-primary">
+                                            <h5 class="modal-title">Ubah User {{$item->name}}</h5>
                                             <button class="btn-close" type="button" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -66,7 +66,7 @@
                                             <form action="{{route('update-user')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="mb-3">
-                                                    <label class="col-form-label" for="recipient-name">Name:</label>
+                                                    <label class="col-form-label" for="recipient-name">Nama:</label>
                                                     <input class="form-control" name="id" type="text" value="{{$item->id}}" hidden>
                                                     <input class="form-control" name="name" type="text" value="{{$item->name}}" disabled>
                                                 </div>
@@ -86,7 +86,7 @@
                                                     </select>
                                                   </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-primary" type="submit">Save</button>
+                                                    <button class="btn btn-primary" type="submit">Simpan</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -99,11 +99,11 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Name</th>
+                                <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Created at / Updated at</th>
                                 <th>Log</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -114,8 +114,8 @@
                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                        <div class="modal-dialog" role="document">
                            <div class="modal-content">
-                               <div class="modal-header">
-                                   <h5 class="modal-title">Add User</h5>
+                               <div class="modal-header bg-primary">
+                                   <h5 class="modal-title">Tambah User</h5>
                                    <button class="btn-close" type="button" data-bs-dismiss="modal"
                                        aria-label="Close"></button>
                                </div>
@@ -123,7 +123,7 @@
                                    <form method="post" action="{{route('create-user')}}" enctype="multipart/form-data">
                                      @csrf
                                        <div class="mb-3">
-                                           <label class="col-form-label" for="recipient-name">Name:</label>
+                                           <label class="col-form-label" for="recipient-name">Nama:</label>
                                            <input class="form-control" name="name" type="text">
                                        </div>
                                        <div class="mb-3">
@@ -131,7 +131,7 @@
                                             <input class="form-control" name="email" type="email">
                                        </div>
                                        <div class="mb-3">
-                                        <label class="col-form-label" for="recipient-name">Phone:</label>
+                                        <label class="col-form-label" for="recipient-name">Nomor Telepon:</label>
                                         <input class="form-control" name="phone" type="text">
                                        </div>
                                        <div class="mb-3">
@@ -139,7 +139,7 @@
                                         <input class="form-control" name="password" type="password">
                                        </div>
                                        <div class="mb-3">
-                                         <label class="col-form-label">Add Role</label>
+                                         <label class="col-form-label">Tambahkan Role :</label>
                                          <select class="js-example-basic-multiple col-sm-12" name="role">
                                             @foreach ($roles as $item)
                                              <option value="{{$item->id}}">{{$item->name}}</option>
@@ -147,7 +147,7 @@
                                          </select>
                                        </div>
                                        <div class="modal-footer">
-                                           <button type="submit" class="btn btn-primary">Save</button>
+                                           <button type="submit" class="btn btn-primary">Simpan</button>
                                        </div>
                                    </form>
                                </div>

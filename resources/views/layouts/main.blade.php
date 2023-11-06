@@ -33,7 +33,7 @@
                 <!-- Container-fluid Ends-->
             </div>
             <!-- footer start-->
-           @include('layouts.footer')
+           {{-- @include('layouts.footer') --}}
         </div>
     </div>
       <!-- scripts-->

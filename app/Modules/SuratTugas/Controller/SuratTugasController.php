@@ -48,10 +48,40 @@ class SuratTugasController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function add_surat_tugas(FormSuratSTDanSPPD $request){
+    public function add_surat_tugas(Request $request){
         return $this->SuratTugasInterface->add_surat_tugas($request);
     }
     
+    /**
+     * edit_surat_tugas page
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function edit_surat_tugas($id){
+        return $this->SuratTugasInterface->edit_surat_tugas($id);
+    }
+        
+    /**
+     * update_surat_tugas
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function update_surat_tugas(Request $request){
+        return $this->SuratTugasInterface->update_surat_tugas($request);
+    }
+    
+    /**
+     * delete_surat_tugas
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function delete_surat_tugas($id){
+        return $this->SuratTugasInterface->delete_surat_tugas($id);
+    }
+
     /**
      * cetak_surat tugas
      *
@@ -60,5 +90,15 @@ class SuratTugasController extends Controller
      */
     public function cetak_st($id){
         return $this->SuratTugasInterface->cetak_st($id);
+    }
+    
+    /**
+     * cetak_surat_spd
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function cetak_spd($id){
+        return $this->SuratTugasInterface->cetak_spd($id);
     }
 }

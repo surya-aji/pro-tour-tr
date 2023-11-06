@@ -18,7 +18,11 @@ return new class extends Migration
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->string('jabatan');
-            $table->string('pangkat_golongan');
+            $table->string('pangkat');
+            $table->string('golongan');
+            $table->string('nomor_telepon')->nullable();
+            $table->string('alamat')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

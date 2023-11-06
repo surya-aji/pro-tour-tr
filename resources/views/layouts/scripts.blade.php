@@ -9,12 +9,14 @@
  <!-- Bootstrap js-->
  <script src="{{asset('build/template/assets/js/bootstrap/popper.min.js')}}"></script>
  <script src="{{asset('build/template/assets/js/bootstrap/bootstrap.min.js')}}"></script>
+ <script src="{{asset('build/template/assets/js/popover-custom.js')}}"></script>
  <!-- Plugins JS start-->
  
  <script src="{{asset('build/template/assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
  <script src="{{asset('build/template/assets/js/datatable/datatables/datatable.custom.js')}}"></script>
  <script src="{{asset('build/template/assets/js/chart/chartist/chartist.js')}}"></script>
  <script src="{{asset('build/template/assets/js/chart/chartist/chartist-plugin-tooltip.js')}}"></script>
+ <script src="{{asset('build/template/assets/js/tooltip-init.js')}}"></script>
  <script src="{{asset('build/template/assets/js/chart/knob/knob.min.js')}}"></script>
  <script src="{{asset('build/template/assets/js/chart/knob/knob-chart.js')}}"></script>
  <script src="{{asset('build/template/assets/js/chart/apex-chart/apex-chart.js')}}"></script>
@@ -42,10 +44,16 @@
  <script src="{{asset('build/template/assets/js/select2/select2.full.min.js')}}"></script>
  <script src="{{asset('build/template/assets/js/select2/select2-custom.js')}}"></script>
  <script src="{{asset('build/template/assets/js/form-wizard/form-wizard')}}.js"></script>
+ <script src="{{asset('build/template/assets/js/height-equal.js')}}"></script>
+ <script src="{{asset('build/template/assets/js/general-widget.js')}}"></script>
  <!-- Plugins JS Ends-->
  <!-- Theme js-->
  <script src="{{asset('build/template/assets/js/script.js')}}"></script>
  <script src="{{asset('build/template/assets/js/theme-customizer/customizer.js')}}"></script>
  <!-- Plugin used-->
+
+ 
+ 
+ 
 
  @stack('custom-script')

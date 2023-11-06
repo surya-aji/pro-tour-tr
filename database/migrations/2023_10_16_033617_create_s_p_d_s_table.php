@@ -13,8 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('s_p_d_s', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('pembuat_komitmen')->constrained(table: 'pegawais', indexName: 'pembuat_komitmen');
+            $table->uuid('id')->primary();
             $table->foreignId('pegawai_id')->constrained(table: 'pegawais', indexName: 'pegawai_id');
             $table->foreignId('surat_tugas_id')->constrained(table: 'surat_tugas', indexName: 'surat_tugas');
             $table->string('tingkat_biaya');
@@ -22,11 +21,12 @@ return new class extends Migration
             $table->integer('lama_dinas');
             $table->date('tanggal_berangkat');
             $table->date('tanggal_pulang');
-            $table->integer('anggaran');
+            $table->string('kota_tujuan');
             $table->string('instansi');
             $table->string('akun');
             $table->string('created_by');
             $table->string('updated_by');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

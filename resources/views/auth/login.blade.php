@@ -59,6 +59,7 @@
     <meta name="keywords"
         content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app" />
     <meta name="author" content="pixelstrap" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="icon" href="https://laravel.pixelstrap.com/viho/assets/images/favicon.png" type="image/x-icon" />
     <link rel="shortcut icon" href="https://laravel.pixelstrap.com/viho/assets/images/favicon.png"
         type="image/x-icon" />

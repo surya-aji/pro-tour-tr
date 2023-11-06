@@ -3,16 +3,19 @@
 namespace App\Modules\SuratTugas\Models;
 
 use App\Traits\LogTraits;
+use Illuminate\Support\Str;
 use App\Modules\Pegawai\Models\Pegawai;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\SuratTugas\Models\SuratTugas;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SPD extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     
     use LogTraits;
+    protected $primaryKey = 'id';
     protected $tagName = 'SPD';
 
      /**
@@ -29,12 +32,45 @@ class SPD extends Model
         'lama_dinas',
         'tanggal_berangkat',
         'tanggal_pulang',
-        'anggaran',
+        'kota_tujuan',
         'instansi',
         'akun',
         'created_by',
         'updated_by',
     ];
+
+     /**
+     * Boot function from Laravel.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = Str::uuid()->toString();
+            }
+        });
+    }
+
+    /**
+     * Get the value indicating whether the IDs are incrementing.
+     *
+     * @return bool
+     */
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    /**
+     * Get the auto-incrementing key type.
+     *
+     * @return string
+     */
+    public function getKeyType()
+    {
+        return 'string';
+    }
 
     public function pegawai(){
         return $this->belongsTo(Pegawai::class);

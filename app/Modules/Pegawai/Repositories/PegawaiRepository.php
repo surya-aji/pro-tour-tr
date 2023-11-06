@@ -2,6 +2,7 @@
 namespace App\Modules\Pegawai\Repositories;
 
 use App\Modules\Pegawai\Models\Pegawai;
+use App\Modules\Cuti\Models\SisaCutiTahunan;
 use App\Modules\Pegawai\Interfaces\PegawaiInterface;
 
 class PegawaiRepository implements PegawaiInterface{  
@@ -27,8 +28,17 @@ class PegawaiRepository implements PegawaiInterface{
    */
   public function store($request){
     try {
-      Pegawai::create(['nama' => $request->nama,'nip' => $request->nip,'tempat_lahir' => $request->tempat_lahir,'tanggal_lahir' => $request->tanggal_lahir,'jabatan' => $request->jabatan,'pangkat_golongan' => $request->pangkat_golongan]);
-      return redirect()->back()->with(['error' => 'Pegawai Created']);
+      $pegawai = Pegawai::create(['nama' => $request->nama,'nip' => $request->nip,'tempat_lahir' => $request->tempat_lahir,'tanggal_lahir' => date('Y-m-d', strtotime($request->tanggal_lahir)),'jabatan' => $request->jabatan,'pangkat' => $request->pangkat, 'golongan' => $request->golongan, 'alamat' => $request->alamat, 'nomor_telepon' => $request->nomor_telepon]);
+
+      // Tambah Untuk Jatah Cuti Tahunan Setiap data pegawai ditambahkan
+      SisaCutiTahunan::create([
+        "pegawai_id" => $pegawai->id,
+        "tahun_satu" => 12,
+        "tahun_dua" => 0,
+        "tahun_tiga" => 0,
+      ]);
+      
+      return redirect()->back()->with(['error' => 'Pegawai Telah Ditambahkan']);
     } catch (\Throwable $th) {
       return view('error')->with('error', $th->getMessage());
     }
@@ -42,7 +52,7 @@ class PegawaiRepository implements PegawaiInterface{
    */
   public function update($request){
     try {      
-        Pegawai::find($request->id)->update($request->validated());
+        Pegawai::find($request->id)->update(['nama' => $request->nama,'nip' => $request->nip,'tempat_lahir' => $request->tempat_lahir,'tanggal_lahir' => date('Y-m-d', strtotime($request->tanggal_lahir)),'jabatan' => $request->jabatan,'pangkat' => $request->pangkat, 'golongan' => $request->golongan, 'alamat' => $request->alamat, 'nomor_telepon' => $request->nomor_telepon]);
         return redirect()->back()->with(['error' => 'Pegawai Updated']);
       
     } catch (\Throwable $th) {

@@ -2,12 +2,14 @@
 
 namespace App\Modules\UserManagement\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\LogTraits;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Permission extends Model
 {
     use HasFactory;
+    use LogTraits;
 
     protected $table = 'permissions';
 

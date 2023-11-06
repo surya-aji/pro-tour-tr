@@ -14,7 +14,7 @@ class SettingRepository implements SettingInterface{
    */
   public function index($request){
     try {
-      return view('settings.index')->with(['setting_website' => Settings::where('type', 'Website')->get(),'title' => 'Setting Page', 'setting_configuration' => Settings::where('type','Configuration')->get()]);
+      return view('settings.index')->with(['setting_website' => Settings::where('type', 'Website')->get(),'title' => 'Setting Page', 'setting_configuration' => Settings::where('type','Configuration')->orderBy('id', 'desc')->get()]);
     } catch (\Throwable $th) {
       return view('error')->with('error', $th->getMessage());
     }

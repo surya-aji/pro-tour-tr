@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\LogTraits;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -22,6 +23,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use HasRoles;
     use SoftDeletes;
+    use LogTraits;
 
     protected $primaryKey = 'id';
     protected $guard_name = 'sanctum';

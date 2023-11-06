@@ -7,10 +7,11 @@
     <meta name="keywords"
         content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
-    <link rel="icon" href="{{asset('build/template/assets/images/favicon.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('build/template/assets/images/favicon.png')}}" type="image/x-icon">
-    <title>Dashboard</title>
+    <link rel="icon" href="{{asset('build/template/assets/images/LOGO_PA.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('build/template/assets/images/LOGO_PA.png')}}" type="image/x-icon">
+    <title>Nama Aplikasi ?</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -49,4 +50,8 @@
         media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/responsive.css')}}">
+    {{-- Custom Css --}}
+    <link rel="stylesheet" href="{{ asset('build/viewerJS/viewer.min.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 </head>

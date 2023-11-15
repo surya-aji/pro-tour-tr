@@ -328,13 +328,13 @@
                                     </td>
                                    
                                     <td class="w-25">{{ $item->dasar_surat }}</td>
-                                    <td>{{ \app\Modules\Pegawai\Models\Pegawai::where('id', $item->dari)->pluck('nama')[0] }}
+                                    <td>{{ \app\Modules\Pegawai\Models\Pegawai::where('id', $item->dari)->pluck('nama')[0] ?? "Data Tidak ditemukan / Terhapus"}}
                                     </td>
                                     <td>
                                         @foreach (json_decode($item->kepada) as $id)
                                             <li>
                                                 <a href=""><i data-feather="person"></i></a>
-                                                {{ \app\Modules\Pegawai\Models\Pegawai::where('id', $id)->pluck('nama')[0] }}
+                                                {{ \app\Modules\Pegawai\Models\Pegawai::where('id', $id)->pluck('nama')[0]  ?? "Data Tidak ditemukan / Terhapus"}}
                                             </li>
                                         @endforeach
                                     </td>

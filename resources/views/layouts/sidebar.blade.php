@@ -77,7 +77,7 @@
                         <ul class="nav-submenu menu-content" style="display: none;">
                             <li><a href="{{ route('index-data-cuti') }}" class="">Data Pengajuan Cuti</a></li>
                             <li><a href="{{ route('index-riwayat-cuti') }}" class="">Riwayat Cuti Pegawai</a></li>
-                            <li><a href="{{ route('index-data-cuti') }}" class="">Kendali Cuti Tahunan</a></li>
+                            <li><a href="{{ route('kendali-cuti') }}" class="">Kendali Cuti Tahunan</a></li>
                         </ul>
 
                         <a class="nav-link menu-title" href="javascript:void(0)">

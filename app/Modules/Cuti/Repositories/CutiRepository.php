@@ -39,23 +39,42 @@ class CutiRepository implements CutiInterface{
       return view('error')->with('error', $th->getMessage());
     }
   }
-
+  
+  /**
+   * show_riwayat
+   *
+   * @param  mixed $id
+   * @return void
+   */
   public function show_riwayat($id){
     try {
-      return view('cuti.detail-riwayat')->with(['title'=> "Riwayat Cuti",'pegawai' => Pegawai::where('id',$id)->first(), 'riwayat' => PengajuanCuti::where('pegawai_id',$id)->get()]);
+      return view('cuti.detail-riwayat')->with([
+        'title'=> "Riwayat Cuti",
+        'pegawai' => Pegawai::where('id',$id)->first(), 
+        'riwayat' => PengajuanCuti::where('pegawai_id',$id)->get(), 
+        'sisa_cs' => PengajuanCuti::sisa_cs($id),
+        'sisa_cap' => PengajuanCuti::sisa_cap($id),
+        'sisa_cb' => PengajuanCuti::sisa_cb($id),
+        'sisa_cm' => PengajuanCuti::sisa_cm($id),
+        'sisa_th' => SisaCutiTahunan::where('pegawai_id',$id)->first()
+      ]);
     } catch (\Throwable $th) {
       return view('error')->with('error', $th->getMessage());
     }
   }
-
+  
+  /**
+   * simpan_pengajuan_cuti
+   *
+   * @param  mixed $request
+   * @return void
+   */
   public function simpan_pengajuan_cuti($request){
     try {
       $tgl_awal = date('Y-m-d', strtotime($request->tanggal_awal));
       $tgl_akhir = date('Y-m-d', strtotime($request->tanggal_akhir));
       $selisih_tgl = Helpers::filterTanggalWeekend($tgl_awal, $tgl_akhir); // lama hari
-      $id_peg = Pegawai::where('id',$request->pegawai)->first();
-      $query1 = SisaCutiTahunan::where('pegawai_id', $id_peg->id)->first(); // Cari Jatah Cuti Tahunan berdarskan Pegawai ID
-
+    
       $cuti = PengajuanCuti::create([
         'nomor_surat' =>$request->nomor_surat,
         'pegawai_id' => $request->pegawai,
@@ -65,21 +84,56 @@ class CutiRepository implements CutiInterface{
         'tanggal_akhir' => $tgl_akhir,
         'lama_hari' => $selisih_tgl,
         'alamat' => $request->alamat,
-        'atasan_id' => $request->atasan
+        'atasan_id' => $request->atasan,
+        'status' => '0'
       ]);
-
-      if ($request->jenis_cuti == 1) {
-        $tahun3 = $query1->tahun_tiga - $selisih_tgl;
+      return redirect()->back()->with(['success' => 'Pengajuan Cuti Telah Tersimpan']);
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
+  
+  /**
+   * reject_jatah_cuti // ditolak atau ditangguhkan
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function reject_jatah_cuti($id){
+    try {
+      $pengajuan = PengajuanCuti::where('id',$id)->first();
+      $pengajuan->update(['status' => 2]);
+      return redirect()->back()->with(['success' => 'Pengajuan Cuti Telah dibatalkan']);
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
+  
+  /**
+   * operasi_pengurangan_jatah_cuti
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function accept_jatah_cuti($id){
+    try {
+       //  Pengurangan Jatah Cuti
+       $pengajuan = PengajuanCuti::where('id',$id)->first();
+       $id_peg = Pegawai::where('id',$pengajuan->pegawai_id)->first();
+       $query1 = SisaCutiTahunan::where('pegawai_id', $id_peg->id)->first(); // Cari Jatah Cuti Tahunan berdarskan Pegawai ID 
+      
+      if ($pengajuan->jenis_cuti->id == 1) {
+        $tahun3 = $query1->tahun_tiga - $pengajuan->lama_hari;
         if ($tahun3 <= 0) {
             $tahun3 = 0;
-            $temp = $query1->tahun_tiga - $selisih_tgl;
+            $temp = $query1->tahun_tiga - $pengajuan->lama_hari;
             if ($query1->tahun_dua + $temp <= 0) {
                 $tahun2 = 0;
                 $temp = $query1->tahun_dua + $temp;
                 if ($query1->tahun_satu + $temp <= 0) {
-                    return response()->json(['message' => 'Jatah Cuti Tahunan Habis'], 400);
-                    $tahun1 = 0;
-                    SisaCutiTahunan::where('pegawai_id', $id_peg->id)->update(['tahun_satu' => $tahun1]);
+                  $tahun1 = 0;
+                  SisaCutiTahunan::where('pegawai_id', $id_peg->id)->update(['tahun_satu' => $tahun1]);
+                  return view('handling')->with(['error' => 'Jatah Cuti Tahunan ' . $pengajuan->pegawai->nama . ' Telah Habis']);
                 } else {
                     $tahun1 = $query1->tahun_satu + $temp;
                     SisaCutiTahunan::where('pegawai_id', $id_peg->id)->update(['tahun_satu' => $tahun1]);
@@ -88,11 +142,27 @@ class CutiRepository implements CutiInterface{
                 $tahun2 = $query1->tahun_dua + $temp;
             }
         } else {
-            $tahun3 = $query1->tahun_tiga - $selisih_tgl;
+            $tahun3 = $query1->tahun_tiga - $pengajuan->lama_hari;
         }
         SisaCutiTahunan::where('pegawai_id', $id_peg->id)->update(['tahun_tiga' => $tahun3, 'tahun_dua' => $tahun2]);
       }
+      $pengajuan->update(['status' => "1"]);
       return redirect()->back()->with(['success' => 'Pengajuan Cuti Telah Tersimpan']);
+      // Pengurangan Jatah Cuti
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
+  
+  /**
+   * cetak_surat_cuti
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function cetak_surat_cuti($id){
+    try {
+      Helpers::cetak_cuti($id);
     } catch (\Throwable $th) {
       return view('error')->with('error', $th->getMessage());
     }
@@ -130,4 +200,43 @@ class CutiRepository implements CutiInterface{
       return view('error')->with('error', $th->getMessage());
     }
   }
+  
+  /**
+   * cetak_kartu_cuti
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function cetak_kartu_cuti($id){
+    try {
+      Helpers::cetak_kartu_cuti($id);
+      return redirect()->back();
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
+  
+  /**
+   * index_kendali_cuti
+   *
+   * @param  mixed $request
+   * @return void
+   */
+  public function index_kendali_cuti($request){
+    try { 
+      $rekap = Pegawai::kendali_cuti();
+      return view('cuti.kendali-cuti')->with(['title'=> "Kendali Cuti", 'rekap' => $rekap]);
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
+
+  public function cetak_kendali_cuti($request){
+    try {
+      Helpers::cetak_kendali_cuti();
+    } catch (\Throwable $th) {
+      return view('error')->with('error', $th->getMessage());
+    }
+  }
+  
 }

@@ -36,7 +36,7 @@
                                         <b><a href="{{route('cetak-spd', $item->id)}}" class="onhover-dropdown">{{ $item->surat_tugas->nomor_surat }}</a></b>
                                     </td>
                                     <td>
-                                    {{ $item->pegawai->nama }}
+                                    {{ $item->pegawai->nama ?? "Data Tidak ditemukan / Terhapus" }}
                                     </td>
                                     <td class="w-25"> {{ $item->surat_tugas->maksud_surat }}</td>
                                     <td>

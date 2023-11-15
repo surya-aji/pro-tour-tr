@@ -40,4 +40,52 @@ interface CutiInterface{
    * @return void
    */
   public function reset_jatah_cuti_tahunan();
+  
+  /**
+   * operasi_pengurangan_jatah_cuti 
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function accept_jatah_cuti($id);
+  
+  /**
+   * reject_jatah_cuti
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function reject_jatah_cuti($id);
+  
+  /**
+   * cetak_surat_cuti
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function cetak_surat_cuti($id);
+  
+  /**
+   * cetak_kartu_cuti
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function cetak_kartu_cuti($id);
+  
+  /**
+   * index_kendali_cuti
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function index_kendali_cuti($request);
+  
+  /**
+   * cetak_kendali_cuti
+   *
+   * @param  mixed $request
+   * @return void
+   */
+  public function cetak_kendali_cuti($request);
 }

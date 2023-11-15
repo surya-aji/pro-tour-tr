@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreign('jenis_cuti_id')->references('id')->on('jenis_cutis')->onDelete('cascade');
             $table->foreign('atasan_id')->references('id')->on('pegawais')->onDelete('cascade');
             $table->foreign('pegawai_id')->references('id')->on('pegawais')->onDelete('cascade');
+            $table->enum('status', [ 0 , 1 , 2])->comment('0 = Menunggu Status, 1 = DiSetujui, 2 = Ditolak');
             $table->softDeletes();
             $table->timestamps();
 

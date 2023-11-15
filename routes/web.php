@@ -54,6 +54,12 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     Route::prefix('cuti')->group(function () {
         Route::get('/pengajuan', [CutiController::class, 'index'])->name('index-data-cuti');
+        Route::get('/kendali-cuti', [CutiController::class, 'index_kendali_cuti'])->name('kendali-cuti');
+        Route::get('/cetak-kendali-cuti', [CutiController::class, 'cetak_kendali_cuti'])->name('cetak-kendali-cuti');
+        Route::get('/disetujui/{id}', [CutiController::class, 'accept_jatah_cuti'])->name('accept_cuti');
+        Route::get('/batalkan/{id}', [CutiController::class, 'reject_jatah_cuti'])->name('reject_cuti');
+        Route::get('/cetak_surat_cuti/{id}', [CutiController::class, 'cetak_surat_cuti'])->name('cetak-cuti');
+        Route::get('/cetak_kartu_cuti/{id}', [CutiController::class, 'cetak_kartu_cuti'])->name('cetak-kartu-cuti');
         Route::post('/pengajuan', [CutiController::class, 'simpan_pengajuan_cuti'])->name('simpan-pengajuan-cuti');
         Route::get('/riwayat-cuti', [CutiController::class, 'index_riwayat_cuti'])->name('index-riwayat-cuti');
         Route::get('/riwayat-cuti/{id}', [CutiController::class, 'detail_riwayat_cuti'])->name('riwayat-cuti-detail');

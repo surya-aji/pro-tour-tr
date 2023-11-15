@@ -28,11 +28,16 @@
                 <hr>
                 <div class="navigation-option">
                   <ul>
-                    <li><a href="javascript:void(0)"><i data-feather="calendar"></i>Cuti Tahunan</a></li>
-                    <li><a href="javascript:void(0)"><i data-feather="alert-octagon"></i>Cuti Karena Alasan Penting</a></li>
-                    <li><a href="javascript:void(0)"><i data-feather="thermometer"></i>Cuti Karena Sakit</a></li>
-                    <li><a href="javascript:void(0)"><i data-feather="file-text"></i>Cuti Besar</a><span class="badge badge-primary badge-pill pull-right">42</span></li>
-                    <li><a href="javascript:void(0)"><i data-feather="users"></i>Cuti Melahirkan</a><span class="badge badge-primary badge-pill pull-right">648</span></li>
+                    <li><a href="javascript:void(0)"><i data-feather="calendar"></i>Cuti Tahunan</a>
+                      <li><a href="javascript:void(0)"></i>{{date('Y') - 2}}</a><span class="badge badge-primary badge-pill pull-right">{{$sisa_th->tahun_tiga}}</span></li>
+                      <li><a href="javascript:void(0)"></i>{{date('Y') - 1}}</a><span class="badge badge-primary badge-pill pull-right">{{$sisa_th->tahun_dua}}</span></li>
+                      <li><a href="javascript:void(0)"></i>{{date('Y')}}</a><span class="badge badge-primary badge-pill pull-right">{{$sisa_th->tahun_satu}}</span></li>
+                    </li>
+                    <hr>
+                    <li><a href="javascript:void(0)"><i data-feather="alert-octagon"></i>Cuti Karena Alasan Penting</a><span class="badge badge-primary badge-pill pull-right">{{$sisa_cap}}</span></li>
+                    <li><a href="javascript:void(0)"><i data-feather="thermometer"></i>Cuti Karena Sakit</a><span class="badge badge-primary badge-pill pull-right">{{$sisa_cs}}</span></li>
+                    <li><a href="javascript:void(0)"><i data-feather="file-text"></i>Cuti Besar</a><span class="badge badge-primary badge-pill pull-right">{{$sisa_cb}}</span></li>
+                    <li><a href="javascript:void(0)"><i data-feather="users"></i>Cuti Melahirkan</a><span class="badge badge-primary badge-pill pull-right">{{$sisa_cm}}</span></li>
                     <li><a href="javascript:void(0)"><i data-feather="x-square"></i>Cuti di Luar Tanggungan Negara</a></li>
                   </ul>
                 </div>
@@ -49,8 +54,9 @@
                 <div class="tab-pane fade active show" id="pills-created" role="tabpanel" aria-labelledby="pills-created-tab">
                   <div class="card mb-0">
                     <div class="card-header">
-                      <h5 class="mb-0">{{$title}}</h5><a class="f-w-600" href="javascript:void(0)"><i class="me-2" data-feather="printer"></i>Print</a>
+                      <h5 class="mb-0">{{$title}}</h5><a class="f-w-600" href="{{route('cetak-kartu-cuti',$pegawai->id)}}"><i class="me-2" data-feather="printer"></i>Print</a>
                     </div>
+                    
                     <div class="card-body p-3">
                       <div class="table-responsive">
                         <table class="display dataTable" id="basic-3">

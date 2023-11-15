@@ -6,6 +6,19 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
+                @if(session()->has('error'))
+                <div class="alert alert-dark dark alert-dismissible fade show" role="alert"><i data-feather="alert-circle"></i>
+                    <p> You can check in on some of those fields below.</p>
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endif
+                @if ($errors->any())
+                <div class="alert alert-dark dark alert-dismissible fade show" role="alert"><i data-feather="alert-circle"></i>
+                    <p> You can check in on some of those fields below.</p>
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endif
+              
                 <h5>{{ $title }}</h5>
                 <button class="btn btn-sm btn-success" type="button" data-bs-toggle="modal"
                     data-bs-target="#exampleModalgetbootstrapCreate" data-whatever="@getbootstrap">Tambah Pengajuan Cuti</button>
@@ -21,14 +34,14 @@
                                 <th>Jenis Cuti</th>
                                 <th>Pelaksanaan Cuti</th>
                                 {{-- <th>Catatan Cuti</th> --}}
-                                <th>Aksi</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pengajuan as $item)     
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{$item->nomor_surat}}</td>
+                                <td><b><a href="{{route('cetak-cuti', $item->id)}}" class="onhover-dropdown">{{$item->nomor_surat}}</a></b></td>
                                 <td>{{$item->pegawai->nama}}</td>
                                 <td>{{$item->jenis_cuti->jenis_cuti}}</td>
                                 <td>{{\Carbon\Carbon::parse($item->tanggal_awal)->isoFormat('D MMMM Y')}}
@@ -42,7 +55,16 @@
                                 </td> --}}
 
                                 <td>
-                                    <button class="btn btn-sm btn-danger" type="button"  data-whatever="@getbootstrap">Batalkan Pengajuan</button>
+                                    @if ($item->status == 0)
+                                    <a class="btn btn-primary btn-sm" href="{{route('accept_cuti', $item->id)}}">Disetujui</a>
+                                    <a class="btn btn-danger btn-sm" href="{{route('reject_cuti', $item->id)}}">Batalkan Pengajuan</a>   
+                                    @endif
+                                    @if ($item->status == 1)
+                                        Telah Disetujui
+                                    @endif
+                                    @if ($item->status == 2)
+                                        Ditangguhkan / Dibatalkan
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -58,7 +80,7 @@
                                 <th>Jenis Cuti</th>
                                 <th>Pelaksanaan Cuti</th>
                                 {{-- <th>Catatan Cuti</th> --}}
-                                <th>Aksi</th>
+                                <th>Status</th>
                             </tr>
                         </tfoot>
                     </table>

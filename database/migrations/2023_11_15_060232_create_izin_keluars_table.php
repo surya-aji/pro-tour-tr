@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('izin_keluars', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('pemberi_perintah_id');
+            $table->unsignedBigInteger('pegawai_id');
+            $table->date('tanggal');
+            $table->time('jam_awal', $precision = 0);
+            $table->time('jam_akhir', $precision = 0);
+            $table->text('keperluan');
+            $table->foreign('pemberi_perintah_id')->references('id')->on('pegawais')->onDelete('cascade');
+            $table->foreign('pegawai_id')->references('id')->on('pegawais')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

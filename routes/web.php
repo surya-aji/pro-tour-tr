@@ -6,6 +6,7 @@ use App\Modules\History\Controller\HistoryController;
 use App\Modules\Pegawai\Controller\PegawaiController;
 use App\Modules\Settings\Controller\SettingController;
 use App\Modules\Dashboard\Controller\DashboardController;
+use App\Modules\Perizinan\Controller\PerizinanController;
 use App\Modules\SuratTugas\Controller\SuratTugasController;
 use App\Modules\UserManagement\Controller\UserManagementController;
 
@@ -65,6 +66,15 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         Route::get('/riwayat-cuti/{id}', [CutiController::class, 'detail_riwayat_cuti'])->name('riwayat-cuti-detail');
         Route::get('/reset-jatah-cuti', [CutiController::class, 'reset_jatah_cuti_tahunan'])->name('reset-jatah-cuti');
     });
+
+    Route::prefix('perizinan')->group(function () {
+        Route::get('/izin-keluar', [PerizinanController::class, 'index_izin_keluar'])->name('index-izin-keluar');
+        Route::get('/p-izin-keluar', [PerizinanController::class, 'index_izin_keluar_pegawai'])->name('p-index-izin-keluar');
+        
+        // Route::post('/update-pegawai', [PegawaiController::class, 'update'])->name('update-pegawai');
+        // Route::get('/delete-pegawai/{id}', [PegawaiController::class, 'delete'])->name('delete-pegawai');
+    });
+
 
     Route::prefix('surat')->group(function () {
         Route::get('/surat-tugas', [SuratTugasController::class, 'index_surat_tugas'])->name('index-surat-tugas');

@@ -118,7 +118,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-5"><img class="bg-img-cover bg-center"
-                        src="{{asset('build/template/assets/images/login/3.jpg')}}" alt="looginpage" /></div>
+                        src="{{asset('build/template/assets/images/login/2.jpg')}}" alt="looginpage" /></div>
                 <div class="col-xl-7 p-0">
                     <div class="login-card">
                         <form class="theme-form login-form" method="POST" action="{{ route('login') }}">

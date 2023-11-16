@@ -38,6 +38,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/chartist.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/date-picker.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/timepicker.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/prism.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/vector-map.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('build/template/assets/css/select2.css')}}">

@@ -82,6 +82,15 @@
 
                         <a class="nav-link menu-title" href="javascript:void(0)">
                             @if (!request()->is('user/profile'))
+                            <i data-feather="command"></i>
+                            @endif
+                            <span>Perizinan</span></a>
+                        <ul class="nav-submenu menu-content" style="display: none;">
+                            <li><a href="{{ route('index-izin-keluar') }}" class="">Izin Keluar</a></li>
+                        </ul>
+
+                        <a class="nav-link menu-title" href="javascript:void(0)">
+                            @if (!request()->is('user/profile'))
                             <i data-feather="mail"></i>
                             @endif
                             <span>Surat Tugas</span></a>
